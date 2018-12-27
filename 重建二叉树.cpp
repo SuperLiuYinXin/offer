@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <vector>
 
 /*****************************/
 /*　filename: 重建二叉树.cpp */
@@ -13,6 +14,70 @@
 
 using namespace std;
 
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+// begin [l --- r]
+TreeNode * gen_tree(vector<int>& pre, vector<int>& vin, int pl, int pr, int ml, int mr) {
+    if (pl > pr) {
+        return NULL;
+    }
+    int preRoot = pre[pl], i = ml;
+    for (i = ml;  i <= mr && preRoot != vin[i]; ) {
+        ++i;
+    }
+
+    TreeNode * root = new TreeNode(preRoot);
+    // cout << preRoot << " i=" << i  << endl;
+    root->left = gen_tree(pre, vin, pl + 1, pl + i - ml, ml, i - 1);
+    root->right = gen_tree(pre, vin, pl + i + 1 - ml, pr, i + 1, mr);
+    return root;
+}
+
+// 中序遍历
+void printTree(TreeNode * root) {
+    if (root == NULL) 
+        return;
+    printTree(root->left);
+    cout << root->val << endl;
+    printTree(root->right);
+}
+
+class Solution {
+public:
+    TreeNode* reConstructBinaryTree(vector<int> pre,vector<int> vin) {
+        if (pre.size() <= 0 || vin.size() <= 0 || pre.size() != vin.size() ) 
+            return NULL;
+
+        return gen_tree(pre, vin, 0, pre.size() - 1, 0, vin.size() - 1);
+    }
+};
+
 int main(){
+    vector<int> pre, vin;
+    pre.push_back(1);
+    pre.push_back(2);
+    pre.push_back(4);
+    pre.push_back(7);
+    pre.push_back(3);
+    pre.push_back(5);
+    pre.push_back(6);
+    pre.push_back(8);
+
+    vin.push_back(4);
+    vin.push_back(7);
+    vin.push_back(2);
+    vin.push_back(1);
+    vin.push_back(5);
+    vin.push_back(3);
+    vin.push_back(8);
+    vin.push_back(6);
+    Solution s;
+    TreeNode * t = s.reConstructBinaryTree(pre, vin);
+    printTree(t);
     return 0;
 }
