@@ -17,7 +17,7 @@ public:
         int bit = 0;
         if (n < 0) {
             n = n & 0x7fffffff;
-            bit++;
+            bit++; // 符号位
         }
         while (n != 0) {
             bit += n & 1;
