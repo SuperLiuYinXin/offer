@@ -14,8 +14,13 @@ struct TreeNode {
 	}
 };
 
-void printVector() {
-
+// 题目复杂链表的复制所用的结构体
+struct RandomListNode {
+    int label;
+    struct RandomListNode *next, *random;
+    RandomListNode(int x) :
+            label(x), next(NULL), random(NULL) {
+    }
 };
 
 #endif
