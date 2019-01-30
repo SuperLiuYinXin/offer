@@ -34,5 +34,10 @@ int main(){
 
     Solution s;
     cout << s.Power(2.2, -1);
+
+    for (int i = 0; i < v.size(); ++i) {
+
+        cout << v[i] << " ";
+    }
     return 0;
 }
