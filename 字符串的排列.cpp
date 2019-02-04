@@ -65,10 +65,7 @@ public:
       }
     }
 };
-
-int main(){
-
-    Solution s;
+int main(){ Solution s;
     vector<string> v;
 
     v = s.Permutation("aa");
