@@ -4,6 +4,7 @@
 #ifndef UTILS_H_ 
 #define UTILS_H_ 
 
+#include <vector>
 
 struct TreeNode {
 	int val;
@@ -29,6 +30,19 @@ struct ListNode {
 	ListNode(int x) :
 			val(x), next(NULL) {
 	}
+};
+
+class Node {
+public:
+    int val;
+    vector<Node*> children;
+
+    Node() {}
+
+    Node(int _val, vector<Node*> _children) {
+        val = _val;
+        children = _children;
+    }
 };
 
 #endif
