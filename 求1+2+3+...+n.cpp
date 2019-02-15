@@ -21,9 +21,6 @@ class add{
   add(){
     sum += 1 + a;
   }
-  static int getSum(){
-    return sum;
-  }
 };
 class Solution {
 public:
@@ -31,7 +28,7 @@ public:
       a = n;
       sum = 0;
       add an[n];
-      return an[0].getSum() >> 1;
+      return sum >> 1;
     }
 };
 
