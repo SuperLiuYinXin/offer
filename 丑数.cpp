@@ -19,6 +19,10 @@ using namespace std;
 
 class Solution {
 public:
+    // leetcode 
+    int nthUglyNumber(int n) {
+      return GetUglyNumber_Solution(n);
+    }
     int GetUglyNumber_Solution(int index) {
       if (index <= 0) {
         return 0;

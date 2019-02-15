@@ -47,7 +47,6 @@ public:
           y=y*10;
         cout << "N1=" << N1 << " N2 " << N2 << " N3=" <<N3 << " cnt " << cnt << " x=" << x << " y=" << y << endl;
       }
-
       return cnt;
     }
 };
