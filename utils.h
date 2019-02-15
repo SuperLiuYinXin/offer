@@ -5,6 +5,7 @@
 #define UTILS_H_ 
 
 #include <vector>
+using std::vector;
 
 struct TreeNode {
 	int val;
