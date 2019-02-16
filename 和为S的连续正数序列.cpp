@@ -16,8 +16,18 @@
 
 using namespace std;
 
-// 感觉可是使用滑动窗口
+// 考虑溢出的问题
+int rangeSum(int a, int b) {
+    if (b < a) {
+        int tmp = a;
+        a = b;
+        b = tmp;
+    }
+    // 考虑溢出的问题
+    return ((a + b) >> 1) * (b - a + 1) ;
+}
 
+// 感觉可是使用滑动窗口
 class Solution {
 public:
     vector<vector<int> > FindContinuousSequence(int sum) {
@@ -42,13 +52,26 @@ public:
         }
         return rtn;
     }
-    int rangeSum(int a, int b) {
-        if (b < a) {
-            int tmp = a;
-            a = b;
-            b = tmp;
+    // leetcode  https://leetcode-cn.com/problems/consecutive-numbers-sum/
+    // 这里只需要返回次数，有一个问题是本算也算一次
+    int consecutiveNumbersSum(int sum) {
+        int l = 1, r = 1;
+        // 四舍五入
+        int max = sum / 2.0 + 0.5 , curSum, rtn = 0;
+        if (sum <= 0) return rtn;
+        // cout << "max=" << max << endl;
+        while (l < max) {
+            curSum = rangeSum(l, r);
+            if (curSum > sum) {
+                ++l;
+            } else if (curSum < sum) {
+                ++r;
+            } else if (curSum == sum) {
+                ++rtn;
+                ++r;
+            }
         }
-        return (a + b) * (b - a + 1) >> 1;
+        return rtn + 1;
     }
     void generatorRange(vector<int> & v, int a, int b) {
         for (int i = a; i <= b; ++i) {
@@ -60,13 +83,14 @@ public:
 
 int main(){
     Solution s;
-    vector<vector<int>> rtn = s.FindContinuousSequence(0);
-    for (int i = 0; i < rtn.size(); ++i) {
-        for (int j = 0; j < rtn[i].size(); ++j) {
-            cout << rtn[i][j] << " ";
-        }
-        cout << endl;
-    }
+    // vector<vector<int>> rtn = s.FindContinuousSequence(933320757);
+    cout << s.consecutiveNumbersSum(933320757) << endl;
+    // for (int i = 0; i < rtn.size(); ++i) {
+    //     for (int j = 0; j < rtn[i].size(); ++j) {
+    //         cout << rtn[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
 
     return 0;
 }
