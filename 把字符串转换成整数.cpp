@@ -1,3 +1,16 @@
+
+#include <iostream>
+
+/*****************************/
+/*　filename: 把字符串转换成整数.cpp */
+/*　abstract: 把字符串转换成整数  */
+/*　author :  liuyinxin  */
+/*　time:     2019-02-17 15:30:32  */
+/*****************************/
+/*****************************/
+
+using namespace std;
+
 class Solution {
 public:
     int StrToInt(string str) {
@@ -26,6 +39,7 @@ public:
                 break;
             }
             num = num * 10 + (minus ? -1 : 1 )*(*str - '0');
+            // 注意 signed int
             if ( (!minus && num > 0x7fffffff) 
                 || (minus && num < (signed int)0x80000000 )) {
                     cout << 0x80000000 << endl;
@@ -37,3 +51,15 @@ public:
         return num;
     }
 };
+
+int main(){
+    Solution s;
+    // cout << s.StrToInt("123") << endl;
+    // cout << s.StrToInt("+123") << endl;
+    // cout << s.StrToInt("-123") << endl;
+    // cout << s.StrToInt("0") << endl;
+    // cout << s.StrToInt(" +0 ") << endl;
+    // cout << s.StrToInt("1a33") << endl;
+    cout << s.StrToInt("2147483647") << endl;
+    return 0;
+}
