@@ -16,18 +16,8 @@
 
 using namespace std;
 
-// 考虑溢出的问题
-int rangeSum(int a, int b) {
-    if (b < a) {
-        int tmp = a;
-        a = b;
-        b = tmp;
-    }
-    // 考虑溢出的问题
-    return ((a + b) >> 1) * (b - a + 1) ;
-}
-
 // 感觉可是使用滑动窗口
+
 class Solution {
 public:
     vector<vector<int> > FindContinuousSequence(int sum) {
@@ -72,6 +62,16 @@ public:
             }
         }
         return rtn + 1;
+    }
+    // 考虑溢出的问题
+    int rangeSum(int a, int b) {
+        if (b < a) {
+            int tmp = a;
+            a = b;
+            b = tmp;
+        }
+        // 考虑溢出的问题
+        return ((a + b) >> 1) * (b - a + 1) ;
     }
     void generatorRange(vector<int> & v, int a, int b) {
         for (int i = a; i <= b; ++i) {
