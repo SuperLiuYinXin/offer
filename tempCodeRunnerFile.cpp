@@ -1,39 +1,39 @@
-class Solution {
+class Solution
+{
+private:
+  char rtn = '#';
+  int * arr;
+  queue<char > cqueue;
 public:
-    int StrToInt(string str) {
-        long long num = 0;
-        const char * cstr = str.c_str();
-        if (cstr != nullptr && *cstr != '\0') {
-            bool minus = false;
-            while (*cstr == '+' || *cstr == ' ') {
-                ++cstr;
-            } 
-            while ( *cstr == '-') {
-                ++cstr;
-                minus = true;
-            }
-            if (*cstr != '\0') {
-                num = StrToIntCore(cstr, minus);
-            }
-        }
-        return (int) num;
+  //Insert one char from stringstream
+    Solution () {
+      arr = new int[256];
+      memset(arr, 0, sizeof(arr));
     }
-    long long StrToIntCore(const char * str, bool minus) {
-        long long num = 0;
-        while (*str != '\0' && *str != ' ') {
-            if (*str < '0' || *str > '9') {
-                num = 0;
-                break;
-            }
-            num = num * 10 + (minus ? -1 : 1 )*(*str - '0');
-            if ( (!minus && num > 0x7fffffff) 
-                || (minus && num < (signed int)0x80000000 )) {
-                    cout << 0x80000000 << endl;
-                num = 0;
-                break;
-            }
-            ++str;
+    void Insert(char ch){
+      ++arr[ch];
+      if (arr[ch] == 1) {
+        cqueue.push(ch);
+        if (rtn == '#') {
+          rtn = ch;
         }
-        return num;
+      } else if (ch ==rtn && arr[ch] > 0){
+        while (!cqueue.empty() && arr[cqueue.front()] > 1) {
+          cqueue.pop();
+        }
+        if (cqueue.empty())
+          rtn = '#';
+        else 
+          rtn = cqueue.front();
+      }
     }
+  //return the first appearence once char in current stringstream
+    char FirstAppearingOnce()
+    {
+      return rtn;
+    }
+    ~Solution () {
+      delete[] arr;
+    }
+
 };
