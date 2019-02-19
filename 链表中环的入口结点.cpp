@@ -11,6 +11,8 @@
 /*****************************/
 
 using namespace std;
+// 思路: 先判断是否是环, 在从头开始走, 第一个相遇的节点就是
+
 
 class Solution {
 public:
