@@ -52,8 +52,6 @@ public:
                 }
                 rtn.push_back(v);
             }
-
-        
             return rtn;
         }
     
